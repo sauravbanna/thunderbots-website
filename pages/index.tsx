@@ -6,6 +6,8 @@ import { ThemeProvider } from '@mui/material/styles'
 import Header from "../components/Header"
 import Stats from "../components/Stats"
 import About from "../components/About"
+import Sponsors from "../components/Sponsors"
+import SubTeams from "../components/SubTeams"
 
 const Home: NextPage = () => {
   return (
@@ -16,6 +18,8 @@ const Home: NextPage = () => {
             <Stats />
             <About />
         </div>
+        <SubTeams />
+        <Sponsors />
     </ThemeProvider>
   )
 }
