@@ -1,8 +1,13 @@
 import styles from '../styles/home.module.css'
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
+import styled from 'styled-components'
+import useScrollOffset from '../hooks/useScrollOffset'
+import {useRef} from 'react'
 
 const Stats = () => {
+    const svgRef = useRef();
+    const offset = useScrollOffset(svgRef, 1.5);
 
     const STATS = [
         {
@@ -39,11 +44,23 @@ const Stats = () => {
         }
     ]
 
+    const StyledSvg = styled.svg`
+        ${props =>
+            `
+                width: ${30 * (offset / 100)}vw;
+                height: ${30 * (offset / 100)}vw;
+                opacity: ${offset}%;
+                transform: rotate(${((100 - offset) / 100) * 30}deg);
+            `
+        }
+    `
+
     return (
         <div
             className={styles.stats}
+            ref={svgRef}
         >
-            <svg>
+            <StyledSvg offset={offset}>
                 <circle cx="50%" cy="50%" r="10%" fill="blue" />
                 {STATS.map((ele) => {
                     return (
@@ -62,7 +79,7 @@ const Stats = () => {
                         </g>
                     );
                 })}
-            </svg>
+            </StyledSvg>
         </div>
     );
 }

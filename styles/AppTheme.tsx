@@ -14,6 +14,9 @@ const AppTheme = createTheme({
         },
         h5: {
             fontSize: "1.2vw"
+        },
+        h6: {
+            fontSize: "1vw"
         }
     }
 })

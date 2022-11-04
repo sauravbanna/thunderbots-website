@@ -10,8 +10,11 @@ interface ISectionProps {
 const Section = ({name, className, children} : ISectionProps) => {
     return(
         <div className={className ? className : styles.section}>
+            &nbsp;
             <Typography
                 variant="h4"
+                align="center"
+                sx={{marginBottom: "10vh"}}
             >
                 {name}
             </Typography>
