@@ -5,6 +5,17 @@ import styled from 'styled-components'
 import useScrollOffset from '../hooks/useScrollOffset'
 import {useRef} from 'react'
 
+const StyledSvg = styled.svg`
+        ${props =>
+            `
+                width: ${30 * (props.offset / 100)}vw;
+                height: ${30 * (props.offset / 100)}vw;
+                opacity: ${props.offset}%;
+                transform: rotate(${((100 - props.offset) / 100) * 30}deg);
+            `
+        }
+    `
+
 const Stats = () => {
     const svgRef = useRef();
     const offset = useScrollOffset(svgRef, 1.5);
@@ -43,17 +54,6 @@ const Stats = () => {
             color: "pink"
         }
     ]
-
-    const StyledSvg = styled.svg`
-        ${props =>
-            `
-                width: ${30 * (offset / 100)}vw;
-                height: ${30 * (offset / 100)}vw;
-                opacity: ${offset}%;
-                transform: rotate(${((100 - offset) / 100) * 30}deg);
-            `
-        }
-    `
 
     return (
         <div

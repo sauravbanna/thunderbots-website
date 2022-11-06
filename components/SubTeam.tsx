@@ -1,25 +1,26 @@
+import Link from 'next/link'
 import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
+import Button from "@mui/material/Button"
 import Image from "next/image"
-import styled from 'styled-components'
+import styled_component from 'styled-components'
+import {styled} from '@mui/system'
 import {useRef} from 'react'
 import useScrollOffset from '../hooks/useScrollOffset'
 
 export interface ISubTeam {
     name: string,
     image: string,
-    about: string
+    about: string,
+    link: string
 }
 
 export interface ISubTeamProps extends ISubTeam  {
     align: boolean
 }
 
-const SubTeam = ({name, image, about, align} : ISubTeam) => {
-    const subTeamRef = useRef();
-    const offset = useScrollOffset(subTeamRef);
-
-    const StyledDiv = styled.div`
+const StyledDiv = styled_component.div`
         position: relative;
         max-width: 85vw;
         box-sizing: border-box;
@@ -27,12 +28,16 @@ const SubTeam = ({name, image, about, align} : ISubTeam) => {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        ${props => align ?
+        ${props => props.align ?
         `right: ${(100 - props.offset) * 0.2}vw;` :
         `left: ${(100 - props.offset) * 0.2}vw;`
         }
         ${props => `opacity: ${props.offset + 10}%;`}
     `
+
+const SubTeam = ({name, image, about, align, link} : ISubTeam) => {
+    const subTeamRef = useRef();
+    const offset = useScrollOffset(subTeamRef);
 
 
 
@@ -60,14 +65,22 @@ const SubTeam = ({name, image, about, align} : ISubTeam) => {
                 </Typography>
                 &nbsp;
                 <div>
-                    {offset}
+                    <Link href={`/${link}`}>
+                        <Button
+                            endIcon={<KeyboardArrowRightIcon />}
+                        >
+                            <Typography>
+                                {"Learn More"}
+                            </Typography>
+                        </Button>
+                    </Link>
                 </div>
             </div>
         );
     }
 
     return (
-        <StyledDiv id="subteam_element" ref={subTeamRef} offset={offset}>
+        <StyledDiv id="subteam_element" ref={subTeamRef} offset={offset} align={align}>
             {align ? renderText(align) : renderImage()}
             {align ? renderImage() : renderText(align)}
         </StyledDiv>
